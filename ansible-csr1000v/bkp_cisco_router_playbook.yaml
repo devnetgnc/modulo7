@@ -1,0 +1,15 @@
+---
+  - name: AUTOMATIC BKP OF RUNNING-CONFIG
+    hosts: csr1kv
+    gather_facts: false
+    connection: local
+    tasks:
+      - name: EJECUTANDO COMANDO RUNNING-CONFIG
+        ios_command:
+          commands:
+            - show running-config
+        register: config
+      - name: GUARDANDO CONFIGURACIÓN to ./backups
+        copy:
+          content: "{{config.stdout[0]}}"
+          dest: "backups/show_run_{{inventory_hostname}}.txt"
