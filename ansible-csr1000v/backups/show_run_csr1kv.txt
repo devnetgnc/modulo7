@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 6814 bytes
+Current configuration : 6813 bytes
 !
-! Last configuration change at 23:21:43 UTC Tue Oct 26 2021 by cisco
+! Last configuration change at 22:31:50 UTC Tue Nov 2 2021 by cisco
 !
 version 16.11
 service timestamps debug datetime msec
@@ -140,7 +140,7 @@ crypto pki certificate chain SLA-TrustPoint
   D697DF7F 28
   	quit
 !
-license udi pid CSR1000V sn 9FM0RP5DO49
+license udi pid CSR1000V sn 9NARJFBV1IA
 license boot level ax
 diagnostic bootup level minimal
 !

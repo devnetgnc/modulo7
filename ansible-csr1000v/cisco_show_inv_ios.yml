@@ -1,0 +1,36 @@
+---
+- name: Playbook parra correr  3 instrucciones  en Cisco IOS devices
+  hosts: csr1kv
+  gather_facts: no
+  connection: local
+  #Paso 1 ejecutar 3 instrucciones en el router una misma tarea
+  tasks:
+  - name: Running command
+    ios_command:
+      commands:
+        - show inventory
+        - show version
+        - show processes cpu sorted | i CPU
+    register: ios_router_config
+
+  #Paso 2 Mostrar el resultado en la consola
+  - debug:
+      var: ios_router_config.stdout
+
+  #Paso 3 copiar el resultado en un archivo y lo almacenan ./ios_configurations 
+  - name: Guardar  información del dispositivo en ./ios_configurations
+    copy:
+      dest: "ios_configurations/inv_ios_{{inventory_hostname}}.txt"
+      content: |
+        show inventory
+        -----
+        "{{ios_router_config.stdout[0]}}"
+
+        show version
+        -----
+        "{{ios_router_config.stdout[1]}}"
+
+        show CPU
+        -----
+        "{{ios_router_config.stdout[2]}}" 
+
