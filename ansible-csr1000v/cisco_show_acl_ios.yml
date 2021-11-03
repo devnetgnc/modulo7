@@ -1,0 +1,15 @@
+---
+- name: Playbook to check ACL on Cisco IOS devices
+  hosts: csr1kv
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: Chequear las lista de acceso ACL
+    ios_command:
+      commands:
+        - show access-lists
+    register: output
+
+  - debug: 
+      var: output.stdout  
